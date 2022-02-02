@@ -12,12 +12,11 @@ run: $(CURDIR)/kubearmor-relay-server
 
 .PHONY: build-image
 build-image:
-	docker images | grep kubearmor-relay-server | awk '{print $$3}' | xargs -I {} docker rmi {}
-	cd $(CURDIR); docker build -t kubearmor/kubearmor-relay-server:$(VERSION) .
+	cd $(CURDIR); ./build/build_img.sh
 
 .PHONY: push-image
 push-image:
-	cd $(CURDIR); docker push kubearmor/kubearmor-relay-server:$(VERSION)
+	cd $(CURDIR); ./build/push_img.sh
 
 .PHONY: clean
 clean:
